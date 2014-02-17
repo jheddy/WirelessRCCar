@@ -64,7 +64,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	 	    if(connected){//if the socket is connected
 	 	    	try {
 	 	    		//send a string to the Arduino Server in the form of "set: -seekbarvalue- \n"
-	 	    		dataOutputStream.writeBytes("prog-"+progress+"p");
+	 	    		dataOutputStream.writeBytes("set:"+progress+"-");
 	 	    	}catch (UnknownHostException e) {//catch and
 	 	    		outputText(e.getMessage());//display errors
 	 			} catch (IOException e) {//catch and
