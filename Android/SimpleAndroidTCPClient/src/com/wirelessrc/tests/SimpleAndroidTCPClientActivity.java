@@ -166,7 +166,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 					 outputText(e.getMessage());//display errors
 					 changeConnectionStatus(false);
 				 } catch (NullPointerException e) {//catch and
-					 outputText(e.getMessage());//display errors
+					 outputText("Server Not Reachable");//display errors
 					 changeConnectionStatus(false);
 				 }
 			}else{
