@@ -61,9 +61,6 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	    
 	    joystick = new JoystickView(this);
 	    LinearLayout mainLayout = (LinearLayout) findViewById(R.id.joysticklayout);
-	    LinearLayout.LayoutParams  lllp = (LinearLayout.LayoutParams)mainLayout.getLayoutParams();
-	    lllp.gravity = Gravity.CENTER;
-	    joystick.setLayoutParams(lllp); 
 	    mainLayout.addView(joystick);
 	    
 	    	    
