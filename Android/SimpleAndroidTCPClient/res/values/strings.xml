@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">This is my Android Arduino TCP CLient</string>
+    <string name="hello">Wireless RC Car App</string>
     <string name="console">Console:</string>
     <string name="app_name">Simple Android Arduino TCP Client</string>
     

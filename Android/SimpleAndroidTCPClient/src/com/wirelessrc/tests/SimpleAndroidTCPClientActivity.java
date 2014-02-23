@@ -22,6 +22,7 @@ import com.wirelessrc.tests.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	SeekBar seekBar;//Seekbar to control the Servo
 	TextView seekBarValue;//Textfield displaing the Value of the seekbar
 	EditText ip; //server ip to connect to
+	JoystickView joystick; //joystick to send pwm values
 	
 	Boolean connected=false;//stores the connectionstatus
 	
@@ -57,7 +59,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	    
 	    
 	    LinearLayout mainLayout = (LinearLayout) findViewById(R.id.llout);
-	     JoystickView joystick = new JoystickView(this);
+	    joystick = new JoystickView(this);
 	    mainLayout.addView(joystick);
 	    
 	    
@@ -67,7 +69,45 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	    //Eventlisteners
 	    buttonConnect.setOnClickListener(buttonConnectOnClickListener);
 	    seekBar.setOnSeekBarChangeListener(seekbarchangedListener);
+	    joystick.setOnJostickMovedListener(joystickmovedlistener);
     }
+    
+    
+    
+    JoystickMovedListener joystickmovedlistener = new JoystickMovedListener(){
+
+		@Override
+		public void OnMoved(int pan, int tilt) {
+			Log.d("JOYSTICK", "Pan: "+ pan +" Tilt: "+tilt);
+			
+		}
+
+		@Override
+		public void OnReleased() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void OnReturnedToCenter() {
+			// TODO Auto-generated method stub
+			
+		}};
+    
+    
+    
+    
+    // ----------------------- Joystick EVENTLISTENER - begin ----------------------------
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     // ----------------------- SEEKBAR EVENTLISTENER - begin ----------------------------
     SeekBar.OnSeekBarChangeListener seekbarchangedListener = new SeekBar.OnSeekBarChangeListener(){
