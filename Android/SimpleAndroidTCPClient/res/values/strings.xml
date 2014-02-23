@@ -6,5 +6,7 @@
     <string name="app_name">Simple Android Arduino TCP Client</string>
     
     <string name="servo_name">my Servo:</string>
+    <string name="ip">ip</string>
+    <string name="port">port</string>
 
 </resources>
