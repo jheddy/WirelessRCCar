@@ -35,7 +35,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	
 	Button buttonConnect;//(dis)connect Button
 	SeekBar seekBar;//Seekbar to control the Servo
-	TextView seekBarValue;//Textfield displaing the Value of the seekbar
+	TextView seekBarValue;//Textfield displaing the Value of the seekbar..
 	EditText ip; //server ip to connect to
 	JoystickView joystick; //joystick to send pwm values
 	
@@ -73,7 +73,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
     }
     
     
-    
+    // ----------------------- Joystick EVENTLISTENER - begin ----------------------------
     JoystickMovedListener joystickmovedlistener = new JoystickMovedListener(){
 
 		@Override
@@ -84,20 +84,20 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 
 		@Override
 		public void OnReleased() {
-			// TODO Auto-generated method stub
+			Log.d("JOYSTICK", "Joystick Released");
 			
 		}
 
 		@Override
 		public void OnReturnedToCenter() {
-			// TODO Auto-generated method stub
+			Log.d("JOYSTICK", "Joystick Back to center");
 			
 		}};
     
     
     
     
-    // ----------------------- Joystick EVENTLISTENER - begin ----------------------------
+    // ----------------------- Joystick EVENTLISTENER - end ----------------------------
 
     
     
