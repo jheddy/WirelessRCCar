@@ -1,10 +1,15 @@
-#include <WiFlyHQ.h>
+
+//this is a modified version of the http server example in the wifly harlequin lib 
+
+#include <WiFlyHQ.h> //harlequin wifly lib : https://github.com/harlequin-tech/WiFlyHQ
 #include <SoftwareSerial.h>'
 #include <Servo.h> 
 
+int ledpin = 6;
 int servoPin = 4;
 char buf[80] ;
-SoftwareSerial wifiSerial(10,11); //rx,tx
+SoftwareSerial wifiSerial(8,9); //rx,tx I'm using the arduino wireless sd shield, bended pins 0 and 1 on the shield and put the wifly module on it
+                                // so it wouldnt use the hardware serial and connected pins 0 and 1 on the shield to pins 8 and 9   
 WiFly wifly;
 Servo myservo;
 
@@ -22,11 +27,12 @@ int convertToInt(String value){
 void setup()
 {
     myservo.attach(servoPin);
-    Serial.begin(57600);
+     pinMode(ledpin, OUTPUT);
+    Serial.begin(9600);
     Serial.println(F("Starting"));
     Serial.print(F("Free memory: "));
     Serial.println(wifly.getFreeMemory(),DEC);
-    wifiSerial.begin(57600);
+    wifiSerial.begin(9600);
     if (!wifly.begin(&wifiSerial, &Serial)) {
         Serial.println(F("Failed to start wifly"));
         wifly.setPort(2000);
@@ -34,7 +40,7 @@ void setup()
     }
      
     /* Join wifi network if not already associated */
-    if (wifly.isAssociated()) {
+    if (!wifly.isAssociated()) {
 	/* Setup the WiFly to connect to a wifi network */
 	Serial.println(F("Joining network"));
        wifly.setPort(2000);
@@ -90,13 +96,15 @@ void loop()
          char c = wifly.read();
          command+=c ; 
          
-         if(c == '-')
+         if(c == '\n')
          {
           if(command.indexOf("set:")==0){//if the command begins with "set:"
             String value=command;//store the command into a new String
             value.replace("set:", " "); //replace the "set:" from the command string
             Serial.println("Set a Servo:"+value);//output the servo value
             myservo.write(convertToInt(value));//set the servo to the recieved value
+            analogWrite(ledpin,convertToInt(value) );
+            
           }
           command="";//reset the commandline String
           
