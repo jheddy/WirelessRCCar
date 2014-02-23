@@ -23,6 +23,7 @@ import com.wirelessrc.tests.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,10 +59,14 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	    seekBarValue = (TextView)findViewById(R.id.seekbarvalue);
 	    ip = (EditText)findViewById(R.id.ipaddr);
 	    
-	    
-	    LinearLayout mainLayout = (LinearLayout) findViewById(R.id.llout);
 	    joystick = new JoystickView(this);
+	    LinearLayout mainLayout = (LinearLayout) findViewById(R.id.joysticklayout);
+	    LinearLayout.LayoutParams  lllp = (LinearLayout.LayoutParams)mainLayout.getLayoutParams();
+	    lllp.gravity = Gravity.CENTER;
+	    joystick.setLayoutParams(lllp); 
 	    mainLayout.addView(joystick);
+	    
+	    	    
 	    
 	    
 	    textlog.setText("Starting Client");//log that the App launched
