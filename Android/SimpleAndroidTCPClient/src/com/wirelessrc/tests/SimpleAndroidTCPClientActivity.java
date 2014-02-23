@@ -18,13 +18,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
-import com.lauridmeyer.tests.R;
+import com.wirelessrc.tests.R;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	Button buttonConnect;//(dis)connect Button
 	SeekBar seekBar;//Seekbar to control the Servo
 	TextView seekBarValue;//Textfield displaing the Value of the seekbar
+	EditText ip; //server ip to connect to
 	
 	Boolean connected=false;//stores the connectionstatus
 	
@@ -51,6 +53,13 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	    textlog = (TextView)findViewById(R.id.textlog);
 	    seekBar = (SeekBar)findViewById(R.id.seekbar);
 	    seekBarValue = (TextView)findViewById(R.id.seekbarvalue);
+	    ip = (EditText)findViewById(R.id.ipaddr);
+	    
+	    
+	    LinearLayout mainLayout = (LinearLayout) findViewById(R.id.llout);
+	     JoystickView joystick = new JoystickView(this);
+	    mainLayout.addView(joystick);
+	    
 	    
 	    textlog.setText("Starting Client");//log that the App launched
 	    changeConnectionStatus(false);//change connectionstatus to "disconnected"
@@ -97,7 +106,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 			if(!connected){//if not connected yet
 				outputText("connecting to Server");
 				 try {//try to create a socket and outputstream
-					  socket = new Socket("192.168.43.9", 2000);//create a socket
+					  socket = new Socket(ip.getText().toString(), 2000);//create a socket
 					  dataOutputStream = new DataOutputStream(socket.getOutputStream());//and stream
 					  outputText("successfully connected");//output the connection status
 					  changeConnectionStatus(true);//change the connection status
