@@ -141,6 +141,8 @@ public class SimpleAndroidTCPClientActivity extends Activity {
     };
     // ----------------------- SEEKBAR EVENTLISTENER - end ----------------------------
     
+    
+    
     // ----------------------- CONNECTION BUTTON EVENTLISTENER - begin ----------------------------
     Button.OnClickListener buttonConnectOnClickListener = new Button.OnClickListener(){
 		@Override
@@ -148,7 +150,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 			if(!connected){//if not connected yet
 				outputText("connecting to Server");
 				 try {//try to create a socket and outputstream
-					  socket = new Socket(ip.getText().toString(), 2000);//create a socket
+					  socket = new Socket(ip.getText().toString(), Integer.parseInt(port.getText().toString()));//create a socket
 					  dataOutputStream = new DataOutputStream(socket.getOutputStream());//and stream
 					  outputText("successfully connected");//output the connection status
 					  changeConnectionStatus(true);//change the connection status
@@ -156,6 +158,9 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 					  outputText(e.getMessage());//display errors
 					  changeConnectionStatus(false);
 				 } catch (IOException e) {//catch and
+					 outputText(e.getMessage());//display errors
+					 changeConnectionStatus(false);
+				 } catch (NullPointerException e) {//catch and
 					 outputText(e.getMessage());//display errors
 					 changeConnectionStatus(false);
 				 }
@@ -174,6 +179,8 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	}};
 	// ----------------------- CONNECTION BUTTON EVENTLISTENER - END ----------------------------
 	
+	
+	
 	// Method changes the connection status
 	public void changeConnectionStatus(Boolean isConnected) {
 		connected=isConnected;//change variable
@@ -189,5 +196,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	public void outputText(String msg) {
 		textlog.append(msg+"\n");
 	}
+	
+	
 	
 }
