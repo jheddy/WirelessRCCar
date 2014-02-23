@@ -37,6 +37,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	SeekBar seekBar;//Seekbar to control the Servo
 	TextView seekBarValue;//Textfield displaing the Value of the seekbar..
 	EditText ip; //server ip to connect to
+	EditText port;
 	JoystickView joystick; //joystick to send pwm values
 	
 	Boolean connected=false;//stores the connectionstatus
@@ -78,19 +79,20 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 
 		@Override
 		public void OnMoved(int pan, int tilt) {
-			Log.d("JOYSTICK", "Pan: "+ pan +" Tilt: "+tilt);
+			//use pan value for servo and titlt for speed controller
+			Log.d("JOYSTICK", "Pan: "+ pan +" Tilt: "+tilt); 
 			
 		}
 
 		@Override
 		public void OnReleased() {
-			Log.d("JOYSTICK", "Joystick Released");
+			Log.d("JOYSTICK", "Joystick Released");//send stop signal to car
 			
 		}
 
 		@Override
 		public void OnReturnedToCenter() {
-			Log.d("JOYSTICK", "Joystick Back to center");
+			Log.d("JOYSTICK", "Joystick Back to center");//send stop signal to car
 			
 		}};
     
