@@ -1,4 +1,4 @@
-WirelessRCCar
+Wireless RC Car
 =============
 
 Driving a Hobby RC car using android + wifly RN-XV +arduino Uno
