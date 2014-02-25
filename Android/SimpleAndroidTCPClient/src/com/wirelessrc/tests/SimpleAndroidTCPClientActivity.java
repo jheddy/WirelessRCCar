@@ -22,6 +22,7 @@ import com.wirelessrc.tests.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -62,6 +63,8 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	    joystick = new JoystickView(this);
 	    LinearLayout mainLayout = (LinearLayout) findViewById(R.id.joysticklayout);
 	    mainLayout.addView(joystick);
+	    
+	    textlog.setMovementMethod(new ScrollingMovementMethod());
 	    
 	    	    
 	    
