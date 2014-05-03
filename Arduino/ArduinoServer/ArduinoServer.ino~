@@ -103,29 +103,27 @@ void setup()
 void loop()
 {
 
-  //REMOVE ALL PRINTS FROM READ LOOP TO MAKE IT FASTER
   if (wifly.available() > 0) {
-    
-    int turn = wifly.parseInt();
-    int dir = wifly.parseInt();
-    
-    if (wifly.read() == '\n') {
-     
-      turn = constrain(turn, 0, 180);
-      dir =  constrain(dir, 1000, 1900);
-      
-      //String turning = String(turn);
-      //String direct = String(dir);
-      
-      //Serial.print(turning+",");
-      //Serial.println(direct);
-      
-      myservo.write(turn);
-     // Serial.println(turn);
-      myesc.writeMicroseconds(dir);
-      
-  
-    }    
+
+    char c = wifly.read();
+    command+=c ; 
+
+
+    if(c == '\n') //command ends with a '\n'
+    {
+      if(command.indexOf("set:")==0){ //if the command begins with "set:"
+
+        String value=command;
+        value.replace("set:", " "); 
+        Serial.println("Set a Servo:"+value);//output the servo value
+        myservo.write(convertToInt(value));//set the servo to the recieved value
+        analogWrite(ledpin,convertToInt(value) );
+
+      }
+
+      command="";//reset the commandline String
+
+    }        
   }
 }
 
