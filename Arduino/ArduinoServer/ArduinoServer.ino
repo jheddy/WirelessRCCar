@@ -103,9 +103,8 @@ void setup()
 void loop()
 {
 
-  //REMOVE ALL PRINTS FROM READ LOOP TO MAKE IT FASTER
   if (wifly.available() > 0) {
-    
+  
     int turn = wifly.parseInt();
     int dir = wifly.parseInt();
     
@@ -113,18 +112,9 @@ void loop()
      
       turn = constrain(turn, 0, 180);
       dir =  constrain(dir, 1000, 1900);
-      
-      //String turning = String(turn);
-      //String direct = String(dir);
-      
-      //Serial.print(turning+",");
-      //Serial.println(direct);
-      
+
       myservo.write(turn);
-     // Serial.println(turn);
       myesc.writeMicroseconds(dir);
-      
-  
     }    
   }
 }
