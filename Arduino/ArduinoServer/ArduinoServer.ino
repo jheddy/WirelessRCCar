@@ -21,13 +21,6 @@ const char myPassword[] = "supdudehey";
 const char ip[] = "192.168.150.2";
 const char gateway[] = "192.168.150.1";
 
-int convertToInt(String value){
-  char buf[value.length()];
-  value.toCharArray(buf,value.length());
-  return atoi(buf);
-}
-
-
 void setup()
 {
   myservo.attach(servoPin);
@@ -95,9 +88,6 @@ void setup()
   Serial.println(wifly.getIP(buf, sizeof(buf)));
   
 }
-
-
-
 
 
 void loop()
