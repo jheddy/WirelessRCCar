@@ -5,7 +5,7 @@
 #include <SoftwareSerial.h>'
 #include <Servo.h> 
 
-int ledpin = 6;
+int ledpin = 9;
 int servoPin = 4;
 char buf[80] ;
 //rx,tx I'm using the arduino wireless sd shield, bended pins 0 and 1 on the shield and put the wifly module on it
@@ -16,10 +16,10 @@ Servo myservo;
 String command = "" ;  // command that comes in from android as a string it has the servo value
 
 /* Change these to match your WiFi network */
-const char mySSID[] = "test2";
-const char myPassword[] = "supdudehey";
-const char ip[] = "192.168.150.2";
-const char gateway[] = "192.168.150.1";
+const char mySSID[] = "4PTFM";
+const char myPassword[] = "BJ5VT3PQTF44TXM5";
+const char ip[] = "192.168.1.11";
+const char gateway[] = "192.168.1.1";
 
 void setup()
 {
@@ -29,7 +29,7 @@ void setup()
   Serial.println(F("Starting"));
   Serial.print(F("Free memory: "));
   Serial.println(wifly.getFreeMemory(),DEC);
-  wifiSerial.begin(9600); //WHY CANT I USE ANYTHING GREATER THAN 9600 BAUD RATE? WHY????????
+  wifiSerial.begin(19200); //WHY CANT I USE ANYTHING GREATER THAN 9600 BAUD RATE? WHY????????
   if (!wifly.begin(&wifiSerial, &Serial)) {
     Serial.println(F("Failed to start wifly"));
     wifly.setPort(2000);
@@ -97,14 +97,18 @@ void loop()
   
     int turn = wifly.parseInt();
     int dir = wifly.parseInt();
-    
+   
     if (wifly.read() == '\n') {
+      
+      Serial.print(turn);
+      Serial.println(dir);
+      
      
-      turn = constrain(turn, 0, 180);
-      dir =  constrain(dir, 1000, 1900);
+      //turn = constrain(turn, 0, 180);
+      //dir =  constrain(dir, 1000, 1900);
 
-      myservo.write(turn);
-      myesc.writeMicroseconds(dir);
+      //myservo.write(turn);
+      //myesc.writeMicroseconds(dir);
     }    
   }
 }

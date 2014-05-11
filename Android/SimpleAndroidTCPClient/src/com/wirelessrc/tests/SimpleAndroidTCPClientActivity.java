@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import com.wirelessrc.tests.R;
+import com.MobileAnarchy.Android.Widgets.Joystick.DualJoystickView;
+import com.MobileAnarchy.Android.Widgets.Joystick.JoystickMovedListener;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -36,11 +39,12 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	TextView textlog;//Log for outputs
 	
 	Button buttonConnect;//(dis)connect Button
-	SeekBar seekBar;//Seekbar to control the Servo
+	//SeekBar seekBar;//Seekbar to control the Servo
 	TextView seekBarValue;//Textfield displaing the Value of the seekbar..
 	EditText ip; //server ip to connect to
 	EditText port;
-	JoystickView joystick; //joystick to send pwm values
+	DualJoystickView joystick; //joystick to send pwm values
+	//JoystickView joystick2;
 	
 	Boolean connected=false;//stores the connectionstatus
 	
@@ -56,13 +60,17 @@ public class SimpleAndroidTCPClientActivity extends Activity {
         //connect the view and the objects
 	    buttonConnect = (Button)findViewById(R.id.connect);
 	    textlog = (TextView)findViewById(R.id.textlog);
-	    seekBar = (SeekBar)findViewById(R.id.seekbar);
-	    seekBarValue = (TextView)findViewById(R.id.seekbarvalue);
-	    ip = (EditText)findViewById(R.id.ipaddr);
+	   // seekBar = (SeekBar)findViewById(R.id.seekbar);
+	    //seekBarValue = (TextView)findViewById(R.id.seekbarvalue);
+	    //ip = (EditText)findViewById(R.id.ipaddr);
 	    
-	    joystick = new JoystickView(this);
-	    LinearLayout mainLayout = (LinearLayout) findViewById(R.id.joysticklayout);
-	    mainLayout.addView(joystick);
+	    joystick = (DualJoystickView) findViewById(R.id.dualjoystickView);
+	    joystick.setOnJostickMovedListener(null, null);
+	    //joystick2 = new JoystickView(this);
+	    //RelativeLayout mainLayout1 = (RelativeLayout) findViewById(R.id.joysticklayout);
+
+	    //mainLayout1.addView(joystick);
+	    //mainLayout1.addView(joystick2);
 	    
 	    textlog.setMovementMethod(new ScrollingMovementMethod());
 	    
@@ -74,8 +82,9 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	    
 	    //Eventlisteners
 	    buttonConnect.setOnClickListener(buttonConnectOnClickListener);
-	    seekBar.setOnSeekBarChangeListener(seekbarchangedListener);
-	    joystick.setOnJostickMovedListener(joystickmovedlistener);
+	    //seekBar.setOnSeekBarChangeListener(seekbarchangedListener);
+	    joystick.setOnJostickMovedListener(joystickmovedlistener,joystickmovedlistener);
+	    //joystick2.setOnJostickMovedListener(joystickmovedlistener);
     }
     
     
@@ -155,7 +164,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 			if(!connected){//if not connected yet
 				outputText("connecting to Server");
 				 try {//try to create a socket and outputstream
-					  socket = new Socket(ip.getText().toString(), Integer.parseInt(port.getText().toString()));//create a socket
+					  socket = new Socket("192.168.1.11", 2000);//create a socket
 					  dataOutputStream = new DataOutputStream(socket.getOutputStream());//and stream
 					  outputText("successfully connected");//output the connection status
 					  changeConnectionStatus(true);//change the connection status
@@ -189,7 +198,7 @@ public class SimpleAndroidTCPClientActivity extends Activity {
 	// Method changes the connection status
 	public void changeConnectionStatus(Boolean isConnected) {
 		connected=isConnected;//change variable
-		seekBar.setEnabled(isConnected);//enable/disable seekbar
+		//seekBar.setEnabled(isConnected);//enable/disable seekbar
 		if(isConnected){//if connection established
 			buttonConnect.setText("disconnect");//change Buttontext
 		}else{
