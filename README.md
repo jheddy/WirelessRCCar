@@ -3,7 +3,7 @@ Wireless RC Car
 
 Driving a Hobby RC car using android + wifly RN-XV +arduino Uno
 
-![alt arduino](http://imageshack.com/a/img31/8643/1fo9.jpg) ![alt android](http://imageshack.com/a/img59/6504/t7rr.png)
+![alt arduino](http://imageshack.com/a/img31/8643/1fo9.jpg) ![alt android](http://imagizer.imageshack.us/v2/320x240q90/843/4z7zd.jpg)
 
 
 **remember to use a rotary encoder on the wheel or gps shield to measure speed and display it on the gui or maybe use a Hall effect sensor? http://playground.arduino.cc/Code/HallEffect
