@@ -17,7 +17,7 @@ String command = "" ;  // command that comes in from android as a string it has 
 
 /* Change these to match your WiFi network */
 const char mySSID[] = "4PTFM";
-const char myPassword[] = "BJ5VT3PQTF44TXM5";
+const char myPassword[] = "pass";
 const char ip[] = "192.168.1.11";
 const char gateway[] = "192.168.1.1";
 
