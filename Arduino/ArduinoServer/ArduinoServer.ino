@@ -16,7 +16,7 @@ Servo myservo;
 String command = "" ;  // command that comes in from android as a string it has the servo value
 
 /* Change these to match your WiFi network */
-const char mySSID[] = "4PTFM";
+const char mySSID[] = "TestNetwork";
 const char myPassword[] = "pass";
 const char ip[] = "192.168.1.11";
 const char gateway[] = "192.168.1.1";
